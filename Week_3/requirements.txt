@@ -1,0 +1,4 @@
+django
+#without specifying version will result in automatically install the newest version
+
+psycopg2

@@ -1,0 +1,13 @@
+docker build -t my_dba .
+docker run --name mydba -p 8081:80 -d my_dba
+
+docker build -t my_db .
+docker run --name mydb -itd -p5432:5432 my_db
+
+docker network create mynetwork
+docker run --name mydba2 --network mynetwork -p 8081:80 -d my_dba
+docker run --name mydb2 --network mynetwork -itd -p5432:5432 my_db
+
+docker build -t my_django .
+
+docker run -it -p8000:8000 -v "$(pwd)/app":/app my_django /bin/bash
