@@ -1,0 +1,24 @@
+version: '3.9'
+
+services:
+  api: 
+    build: ./api/
+    hostname: api
+    environment:
+      - name = value
+    volumes:
+      - ./api/code:/app
+    ports: 
+      - "5432:5432"
+    
+  consumer:
+    build: ./consumer/
+    hostname: consumer
+    environment:
+      - API_HOST=${API_HOST}
+      - API_PORT=${API_PORT}
+      - API_ENDPOINT=${API_ENDPOINT}
+    volumes:
+      - ./consumer/code:/app
+    ports:
+      - "80:80"
